@@ -9,6 +9,7 @@ import com.mycompany.helloworld.HelloWorld;
 public class MainActivity extends AppCompatActivity {
 
     private HelloWorld cppApi;
+    private int counter = 1;
 
     static {
         System.loadLibrary("helloworld");
@@ -18,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         cppApi = HelloWorld.create();
     }
 
     public void buttonWasPressed(View view) {
-        String myString = cppApi.getHelloWorld() + "\n";
+        cppApi.setMsg("Hello, Djinni + " + (counter++) + " == ");
+
+        String myString = cppApi.getMsg() + "\n";
         TextView t = (TextView) findViewById(R.id.helloWorldText);
         t.setText(myString + t.getText());
     }
